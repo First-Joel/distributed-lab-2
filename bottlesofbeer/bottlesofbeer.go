@@ -1,7 +1,10 @@
 package main
 import (
 	"flag"
-//	"net/rpc"
+	"fmt"
+	"net/rpc"
+
+	//	"net/rpc"
 //	"fmt"
 //	"time"
 //	"net"
@@ -9,12 +12,38 @@ import (
 
 var nextAddr string
 
+func SingSong(n int){
+	fmt.Printf("%v bottles of beer on the wall %v bottles of beer \n", n,n)
+	n--
+}
+
+func Listen(){
+
+}
+
+func Send(){
+
+}
+
+
+
 
 func main(){
-//	thisPort := flag.String("this", "8030", "Port for this process to listen on")
+	thisPort := flag.String("this", "8030", "Port for this process to listen on")
 	flag.StringVar(&nextAddr, "next", "localhost:8040", "IP:Port string for next member of the round.")
-//	bottles := flag.Int("n",0, "Bottles of Beer (launches song if not 0)")
+	bottles := flag.Int("n",0, "Bottles of Beer (launches song if not 0)")
 	flag.Parse()
+	SingSong(*bottles)
+
+	peer, _ := rpc.Dial("tcp", *thisPort)
+	defer peer.Close()
+
+
+
+
+
+
+
 	//TODO: Up to you from here! Remember, you'll need to both listen for
 	//RPC calls and make your own.
 }
